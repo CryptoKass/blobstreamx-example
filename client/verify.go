@@ -49,10 +49,7 @@ func GetShareProof(eth *ethclient.Client, trpc *http.HTTP, sp *SharePointer) (*s
 	nonce := dataCommitment.ProofNonce.Uint64()
 	height := uint64(sp.Height)
 
-	var blockDataRoot [32]byte
-	for i, b := range blockRes.Block.DataHash[58:] {
-		blockDataRoot[i] = b
-	}
+	blockDataRoot := [32]byte(blockRes.Block.DataHash)
 
 	return &shareloader.SharesProof{
 		Data:             shareProof.Data,
