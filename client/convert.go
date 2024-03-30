@@ -43,7 +43,7 @@ func minNamespace(innerNode []byte) *shareloader.Namespace {
 func maxNamespace(innerNode []byte) *shareloader.Namespace {
 	version := innerNode[29]
 	var id [28]byte
-	for i, b := range innerNode[30:57] {
+	for i, b := range innerNode[30:58] {
 		id[i] = b
 	}
 	return &shareloader.Namespace{
