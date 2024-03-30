@@ -12,10 +12,14 @@ import (
 )
 
 func main() {
-	// step 0. get eth-rpc and trpc endpoint from args
-	ethEndpoint := os.Args[1]
-	trpcEndpoint := os.Args[2]
-	shareloaderAddress := common.HexToAddress(os.Args[3]) // e.g. 0xf2787995D9eb43b57eAdB361227Ddf4FEC99b5Df
+	// step 0. get eth-rpc and trpc endpoint
+	ethEndpoint := "https://arbitrum-sepolia-rpc.publicnode.com"
+	trpcEndpoint := "https://celestia-mocha-rpc.publicnode.com:443"
+
+	// See contract here: https://sepolia.arbiscan.io/contract/0xf2787995D9eb43b57eAdB361227Ddf4FEC99b5Df
+	// This is the address of the ShareLoader contract
+	// The contract wraps the DAVerifier.verifySharesToDataRootTupleRoot method
+	shareloaderAddress := common.HexToAddress("0xf2787995D9eb43b57eAdB361227Ddf4FEC99b5Df")
 
 	// step 1: connect to eth and trpc endpoints
 	eth, err := ethclient.Dial(ethEndpoint)
@@ -52,5 +56,10 @@ func main() {
 		panic(fmt.Errorf("failed to verify share proof: %w", err))
 	}
 
-	fmt.Println("Proof valid:", valid, "Error codes:", errCodes)
+	// step 4: print the result
+	if !valid {
+		fmt.Println("Proof is invalid", "Error codes:", errCodes)
+		os.Exit(1)
+	}
+	fmt.Println("Proof is valid")
 }
