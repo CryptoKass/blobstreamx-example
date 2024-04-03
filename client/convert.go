@@ -31,7 +31,7 @@ func toNamespaceMerkleMultiProofs(proofs []*tmproto.NMTProof) []shareloader.Name
 func minNamespace(innerNode []byte) *shareloader.Namespace {
 	version := innerNode[0]
 	var id [28]byte
-	for i, b := range innerNode[1:28] {
+	for i, b := range innerNode[1:29] {
 		id[i] = b
 	}
 	return &shareloader.Namespace{
@@ -66,12 +66,9 @@ func toNamespaceNode(node []byte) *shareloader.NamespaceNode {
 	}
 }
 
-func namespace(namespaceID []byte) *shareloader.Namespace {
-	version := namespaceID[0]
+func namespace(namespaceID []byte, version uint8) *shareloader.Namespace {
 	var id [28]byte
-	for i, b := range namespaceID[1:] {
-		id[i] = b
-	}
+	copy(id[:], namespaceID)
 	return &shareloader.Namespace{
 		Version: [1]byte{version},
 		Id:      id,

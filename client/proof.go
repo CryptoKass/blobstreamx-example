@@ -54,7 +54,7 @@ func GetShareProof(eth *ethclient.Client, trpc *http.HTTP, sp *SharePointer) (*s
 	return &shareloader.SharesProof{
 		Data:             shareProof.Data,
 		ShareProofs:      toNamespaceMerkleMultiProofs(shareProof.ShareProofs),
-		Namespace:        *namespace(shareProof.NamespaceID),
+		Namespace:        *namespace(shareProof.NamespaceID, uint8(shareProof.NamespaceVersion)),
 		RowRoots:         toRowRoots(shareProof.RowProof.RowRoots),
 		RowProofs:        toRowProofs(shareProof.RowProof.Proofs),
 		AttestationProof: toAttestationProof(nonce, height, blockDataRoot, dcProof.Proof),
