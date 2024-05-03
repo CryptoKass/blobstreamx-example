@@ -8,7 +8,7 @@ A simple example attempt to verify a share proof on chain using blobstreams [DAV
 go run main.go
 ```
 
-This example will fetch data inclusion and share proofs from using Celestia json rpc and then attempts to verifies the generate proof on chain using the deployed ShareLoader contract below.
+This example will fetch data inclusion and share proofs from using Celestia json rpc and then attempts to verify the generated proof on chain using the deployed ShareLoader contract below.
 
 ### ShareLoader Contract
 
